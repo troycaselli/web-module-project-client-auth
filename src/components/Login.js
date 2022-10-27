@@ -13,14 +13,13 @@ const Login = () => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
     }
 
-    console.log(credentials);
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:9000/api/login', credentials)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
             })
-            .catch(err => console.log(err.message));
+            .catch(err => console.log(err.response.data.error));
     }
 
     return(
