@@ -1,0 +1,9 @@
+#friends-wrapper h1 {
+    font-size: 8rem;
+    margin-bottom: 1%;
+    font-weight: 900;
+}
+#friends-list p {
+    font-size: 3rem;
+    font-weight: 900;
+}

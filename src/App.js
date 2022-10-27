@@ -6,6 +6,8 @@ import axios from 'axios';
 
 import Login from './components/Login';
 import Logout from './components/Logout';
+import FriendList from './components/FriendList';
+import AddFriend from './components/AddFriend';
 
 function App() {
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false);
@@ -72,6 +74,8 @@ function App() {
         <Route path='/' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
         <Route path='/login' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
         <Route path='/logout' element={<Logout />} />
+        <Route path='/friends' element={<FriendList />} />
+        <Route path='/friends/add' element={<AddFriend />} />
       </Routes>
     </div>
   );
