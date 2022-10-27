@@ -2,14 +2,16 @@ import React from 'react';
 import './App.css';
 import {Routes, Route, Link} from 'react-router-dom';
 import {useState} from 'react';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
+import { axiosWithAuth } from './util/axiosWithAuth';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import FriendList from './components/FriendList';
 import AddFriend from './components/AddFriend';
 
 function App() {
+  let navigate = useNavigate();
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false);
 
   const handleToggleLoggedIn = () => {
@@ -18,11 +20,13 @@ function App() {
   
   const handleLogout = () => {
     setToggleLoggedIn(false);
-    // axios.post('http://localhost:9000/api/logout')
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    axiosWithAuth()
+      .post('http://localhost:9000/api/logout')
+          .then(res => {
+              localStorage.removeItem('token');
+              return navigate('/login');
+          })
+          .catch(err => console.log(err.response.data.error));
   }
 
   return (
