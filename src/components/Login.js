@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const initialData = {
     username: '',
     password: '',
 }
 
-const Login = () => {
+const Login = (props) => {
+    let navigate = useNavigate();
+
+    console.log(props);
     const [credentials, setCredentials] = useState(initialData);
 
     const handleChange = (e) => {
@@ -18,6 +22,8 @@ const Login = () => {
         axios.post('http://localhost:9000/api/login', credentials)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
+                return navigate('/friends');
+                // props.handleToggleLoggedIn();
             })
             .catch(err => console.log(err.response.data.error));
     }
