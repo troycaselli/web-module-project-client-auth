@@ -2,11 +2,13 @@
 
 html, body, #root {
     margin: 0px;
+    padding:0px;
     height: 100%;
+    width: 100%;
     background: #eeeeee;
     font-family: Lato;
+    font-size: 62.5%;
 }
-
 label {
     display:block;
 }
