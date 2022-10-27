@@ -1,0 +1,43 @@
+#login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5%;
+  }
+  #login-wrapper h1{
+    font-size: 8rem;
+    font-weight: 900;
+    margin-bottom: 2%;
+  }
+  #login-wrapper form {
+    width: 400px;
+  }
+  #login-wrapper form .input-wrapper {
+    margin: 20px 0;
+  }
+  #login-wrapper form p {
+    text-align: left;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+  }
+  #login-wrapper form input {
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: black;
+    padding: 10px 10px;
+    font-size: 2rem;
+    color: #eeeeee;
+  }
+  #login-wrapper form button {
+    width: 100%;
+    background: black;
+    color: #eeeeee;
+    font-size: 2rem;
+    padding: 8px 0;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }

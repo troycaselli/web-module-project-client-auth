@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { axiosWithAuth } from '../util/axiosWithAuth';
+import './AddFriend.css';
 
 const initialData = {
     name: '',
@@ -29,7 +30,7 @@ const AddFriend = () => {
     }
 
     return (
-        <section>
+        <section id='add-friend-wrapper'>
             <h1>ADD FRIEND</h1>
             <form onSubmit={handleSubmit}>
                 <div className='input-wrapper'>
