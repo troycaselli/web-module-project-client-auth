@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 const initialData = {
     username: '',
@@ -12,29 +13,39 @@ const Login = () => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
     }
 
+    console.log(credentials);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:9000/api/login', credentials)
+            .then(res => {
+                localStorage.setItem('token', res.data.token);
+            })
+            .catch(err => console.log(err.message));
+    }
+
     return(
         <section id='login-wrapper'>
             <h1>LOGIN</h1>
-            <form>
-            <div className='input-wrapper'>
-                <p>USERNAME</p>
-                <input 
-                    type='text'
-                    name='username'
-                    value={credentials.username}
-                    onChange={handleChange}
-                ></input>
-            </div>
-            <div className='input-wrapper'>
-                <p>PASSWORD</p>
-                <input 
-                    type='text'
-                    name='password'
-                    value={credentials.password}
-                    onChange={handleChange}
-                ></input>
-            </div>
-            <button type='submit'>SUBMIT</button>
+            <form onSubmit={handleSubmit}>
+                <div className='input-wrapper'>
+                    <p>USERNAME</p>
+                    <input 
+                        type='text'
+                        name='username'
+                        value={credentials.username}
+                        onChange={handleChange}
+                    ></input>
+                </div>
+                <div className='input-wrapper'>
+                    <p>PASSWORD</p>
+                    <input 
+                        type='password'
+                        name='password'
+                        value={credentials.password}
+                        onChange={handleChange}
+                    ></input>
+                </div>
+                <button type='submit'>SUBMIT</button>
             </form>
         </section>
     )
