@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import {Routes, Route, Link} from 'react-router-dom';
 
+import Login from './components/Login';
+
 function App() {
   return (
     <div className='outer-wrapper'>
@@ -46,8 +48,8 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path='/' element={} />
-        <Route path='/' />
+        <Route path='/' element={<Login />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </div>
   );
