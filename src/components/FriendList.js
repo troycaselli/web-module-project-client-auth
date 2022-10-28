@@ -7,18 +7,13 @@ import './FriendList.css';
 const FriendList = () => {
     const [friends, setFriends] = useState([]);
 
-    const getData = () => {
+    useEffect(() => {
         axiosWithAuth()
-            .get('http://localhost:9000/api/friends')
+            .get('/friends')
                 .then(res => {
-                    console.log(res.data);
                     setFriends(res.data);
                 })
                 .catch(err => console.log(err));
-    }
-
-    useEffect(() => {
-        getData();
     }, []);
 
     return(

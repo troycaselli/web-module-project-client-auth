@@ -15,7 +15,7 @@ const AddFriend = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosWithAuth()
-            .post('http://localhost:9000/api/friends', newFriend)
+            .post('/friends', newFriend)
                 .then(res => {
                     console.log(res);
                     return navigate('/friends');
