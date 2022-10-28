@@ -11,7 +11,6 @@ const initialData = {
 const Login = (props) => {
     let navigate = useNavigate();
 
-    console.log(props);
     const [credentials, setCredentials] = useState(initialData);
 
     const handleChange = (e) => {
@@ -23,8 +22,8 @@ const Login = (props) => {
         axios.post('http://localhost:9000/api/login', credentials)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
+                props.handleToggleLoggedIn();
                 return navigate('/friends');
-                // props.handleToggleLoggedIn();
             })
             .catch(err => console.log(err.response.data.error));
     }

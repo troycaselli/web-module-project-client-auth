@@ -14,9 +14,10 @@ import PrivateRoutes from './components/PrivateRoutes';
 function App() {
   let navigate = useNavigate();
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false);
+  console.log(toggleLoggedIn);
 
   const handleToggleLoggedIn = () => {
-    setToggleLoggedIn(toggleLoggedIn);
+    setToggleLoggedIn(!toggleLoggedIn);
   }
   
   const handleLogout = () => {
@@ -37,7 +38,7 @@ function App() {
         <nav>
           <h3>FRIENDS DATABASE</h3>
           <div id='nav-list'>
-            {/* {!toggleLoggedIn ? */}
+            {!toggleLoggedIn ?
               <div className='nav-item'>
                 <Link 
                   style={{textDecoration: 'none', color: '#eeeeee'}} 
@@ -45,7 +46,7 @@ function App() {
                 >
                   LOGIN
                 </Link>
-              </div>
+              </div> :
               <div className='nav-item'>
                 <Link 
                   style={{textDecoration: 'none' , color: '#eeeeee'}}
@@ -55,7 +56,7 @@ function App() {
                   LOGOUT
                 </Link>
               </div>
-            {/* } */}
+            }
             <div className='nav-item'>
               <Link 
                 style={{textDecoration: 'none' , color: '#eeeeee'}}
