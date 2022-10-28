@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route, Link} from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { axiosWithAuth } from './util/axiosWithAuth';
@@ -16,8 +16,14 @@ function App() {
   const [toggleLoggedIn, setToggleLoggedIn] = useState(false);
   console.log(toggleLoggedIn);
 
+  useEffect(() => {
+    const storedValue = localStorage.getItem('loggedInStatus');
+    setToggleLoggedIn(storedValue);
+  })
+
   const handleToggleLoggedIn = () => {
-    setToggleLoggedIn(!toggleLoggedIn);
+    setToggleLoggedIn(true);
+    localStorage.setItem('loggedInStatus', true);
   }
   
   const handleLogout = () => {
@@ -26,6 +32,7 @@ function App() {
       .post('http://localhost:9000/api/logout')
           .then(res => {
               localStorage.removeItem('token');
+              localStorage.removeItem('loggedInStatus');
               return navigate('/login');
           })
           .catch(err => console.log(err.response.data.error));
@@ -38,7 +45,7 @@ function App() {
         <nav>
           <h3>FRIENDS DATABASE</h3>
           <div id='nav-list'>
-            {!toggleLoggedIn ?
+            {!toggleLoggedIn &&
               <div className='nav-item'>
                 <Link 
                   style={{textDecoration: 'none', color: '#eeeeee'}} 
@@ -46,7 +53,9 @@ function App() {
                 >
                   LOGIN
                 </Link>
-              </div> :
+              </div>
+            }
+            {toggleLoggedIn &&
               <div className='nav-item'>
                 <Link 
                   style={{textDecoration: 'none' , color: '#eeeeee'}}
@@ -77,7 +86,7 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path='/' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
+        <Route path='/' element={toggleLoggedIn ? <FriendList /> : <Login />} />
         <Route path='/login' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
         <Route element={<PrivateRoutes />}>
           <Route path='/logout' element={<Logout />} />
