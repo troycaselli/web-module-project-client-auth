@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import FriendList from './components/FriendList';
 import AddFriend from './components/AddFriend';
+import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {
   let navigate = useNavigate();
@@ -77,9 +78,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
         <Route path='/login' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
-        <Route path='/logout' element={<Logout />} />
-        <Route path='/friends' element={<FriendList />} />
-        <Route path='/friends/add' element={<AddFriend />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/friends' element={<FriendList />} />
+          <Route path='/friends/add' element={<AddFriend />} />
+        </Route>
       </Routes>
     </div>
   );
