@@ -54,7 +54,8 @@ const AddFriend = () => {
             <h1>ADD FRIEND</h1>
             <form onSubmit={handleSubmit}>
                 <div className='input-wrapper'>
-                    <p>*FRIEND NAME</p>
+                    <p>FRIEND NAME</p>
+                    {errorValues.name && <p className='error'><i>*{errorValues.name}</i></p>}
                     <input 
                         type='text'
                         name='name'
@@ -63,7 +64,8 @@ const AddFriend = () => {
                     ></input>
                 </div>
                 <div className='input-wrapper'>
-                    <p>*FRIEND EMAIL</p>
+                    <p>FRIEND EMAIL</p>
+                    {errorValues.email && <p className='error'><i>*{errorValues.email}</i></p>}
                     <input 
                         type='text'
                         name='email'

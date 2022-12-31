@@ -45,3 +45,8 @@
   .disabled {
     opacity: 0.3
   }
+
+  #add-friend-wrapper .error {
+    font-size: 1.5rem;
+    color: rgb(187, 27, 27);
+  }
