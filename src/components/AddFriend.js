@@ -1,16 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import * as yup from 'yup';
+import schema from '../validation/formSchema';
 import { axiosWithAuth } from '../util/axiosWithAuth';
 import './AddFriend.css';
 
-const initialData = {
+const initialFormValues = {
     name: '',
     email: '',
 }
 
+const initialErrorValues = {
+    name: '',
+    email: ''
+}
+
 const AddFriend = () => {
     let navigate = useNavigate();
-    const [newFriend, setNewFriend] = useState(initialData);
+    const [newFriend, setNewFriend] = useState(initialFormValues);
+    const [errorValues, setErrorValues] = useState(initialErrorValues);
+    const [disabled, setDisabled] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,10 +31,22 @@ const AddFriend = () => {
                 })
                 .catch(err => console.log(err.response.data.error));
     }
-    console.log(newFriend);
+
+    useEffect(() => {
+        schema.isValid(newFriend).then(valid => setDisabled(!valid))
+    }, [newFriend])
 
     const handleChange = (e) => {
+        const {name, value} = e.target;
+        validate(name, value);
         setNewFriend({...newFriend, [e.target.name]: e.target.value});
+    }
+
+    const validate = (name, valueToUse) => {
+        yup.reach(schema, name)
+            .validate(valueToUse)
+            .then(() => setErrorValues({...errorValues, [name]: ''}))
+            .catch(err => setErrorValues({...errorValues, [name]: err.errors[0]}))
     }
 
     return (
@@ -33,7 +54,7 @@ const AddFriend = () => {
             <h1>ADD FRIEND</h1>
             <form onSubmit={handleSubmit}>
                 <div className='input-wrapper'>
-                    <p>FRIEND NAME</p>
+                    <p>*FRIEND NAME</p>
                     <input 
                         type='text'
                         name='name'
@@ -42,7 +63,7 @@ const AddFriend = () => {
                     ></input>
                 </div>
                 <div className='input-wrapper'>
-                    <p>FRIEND EMAIL</p>
+                    <p>*FRIEND EMAIL</p>
                     <input 
                         type='text'
                         name='email'
@@ -50,7 +71,11 @@ const AddFriend = () => {
                         onChange={handleChange}
                     ></input>
                 </div>
-                <button type='submit'>SUBMIT</button>
+                <button 
+                    className={disabled ? 'disabled' : ''} 
+                    type='submit' 
+                    disabled={disabled}
+                >SUBMIT</button>
             </form>
         </section>
     )
