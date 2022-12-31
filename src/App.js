@@ -11,7 +11,6 @@ import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {
   const [toggleLoggedIn, setToggleLoggedIn] = useState(localStorage.getItem('loggedInStatus') || false);
-  console.log(toggleLoggedIn);
 
   // useEffect(() => {
   //   const storedValue = localStorage.getItem('loggedInStatus');
@@ -19,8 +18,9 @@ function App() {
   // }, []);
 
   const handleToggleLoggedIn = () => {
-    setToggleLoggedIn(!toggleLoggedIn);
-    localStorage.setItem('loggedInStatus', toggleLoggedIn);
+    const isLoggedIn = !toggleLoggedIn
+    localStorage.setItem('loggedInStatus', isLoggedIn);
+    setToggleLoggedIn(isLoggedIn);
   }
 
   return (
