@@ -39,11 +39,15 @@
     padding: 8px 0;
     outline: none;
     border: none;
-    cursor: pointer;
   }
 
   .disabled {
-    opacity: 0.3
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .enabled {
+    cursor: pointer;
   }
 
   #add-friend-wrapper .error {

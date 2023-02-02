@@ -11,7 +11,9 @@
   }
   #error {
     font-size: 2rem;
-    color: rgb(170, 7, 7);
+    color: rgb(190, 5, 5);
+    margin-bottom: 0;
+    font-style: italic;
   }
   #login-wrapper form {
     width: 400px;

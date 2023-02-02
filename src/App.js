@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Routes, Route, Link} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {Routes, Route, Link, Navigate} from 'react-router-dom';
+import {useState} from 'react';
 
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -11,11 +11,6 @@ import PrivateRoutes from './components/PrivateRoutes';
 
 function App() {
   const [toggleLoggedIn, setToggleLoggedIn] = useState(localStorage.getItem('loggedInStatus') || false);
-
-  // useEffect(() => {
-  //   const storedValue = localStorage.getItem('loggedInStatus');
-  //   setToggleLoggedIn(storedValue);
-  // }, []);
 
   const handleToggleLoggedIn = () => {
     const isLoggedIn = !toggleLoggedIn
@@ -30,23 +25,21 @@ function App() {
         <nav>
           <h3>FRIENDS DATABASE</h3>
           <div id='nav-list'>
-            {!toggleLoggedIn &&
-              <div className='nav-item'>
-                <Link 
-                  style={{textDecoration: 'none', color: '#eeeeee'}} 
-                  to='/login'
-                >
-                  LOGIN
-                </Link>
-              </div>
-            }
-            {toggleLoggedIn &&
+            {toggleLoggedIn ? 
               <div className='nav-item'>
                 <Link 
                   style={{textDecoration: 'none' , color: '#eeeeee'}}
                   to='/logout'
                 >
                   LOGOUT
+                </Link>
+              </div> :
+              <div className='nav-item'>
+                <Link 
+                  style={{textDecoration: 'none', color: '#eeeeee'}} 
+                  to='/login'
+                >
+                  LOGIN
                 </Link>
               </div>
             }
@@ -70,8 +63,8 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path='/' element={toggleLoggedIn ? <FriendList /> : <Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
-        <Route path='/login' element={<Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
+        <Route path='/' element={toggleLoggedIn ? <Navigate to='/friends' /> : <Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
+        <Route path='/login' element={toggleLoggedIn ? <Navigate to='/friends' /> : <Login handleToggleLoggedIn={handleToggleLoggedIn} />} />
         <Route element={<PrivateRoutes />}>
           <Route path='/logout' element={<Logout handleToggleLoggedIn={handleToggleLoggedIn} />} />
           <Route path='/friends' element={<FriendList />} />

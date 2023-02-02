@@ -20,9 +20,11 @@ const FriendList = () => {
         <section id='friends-wrapper'>
             <h1>FRIEND LIST</h1>
             <div id='friends-list'>
-                {friends.map((friend) => {
+                {friends.map((friend, idx) => {
                     return (
-                        <p key={friend.id}>{`- ${friend.name} - ${friend.email}`}</p>
+                        <div key={friend.id}>
+                            <p>{`${idx + 1}) ${friend.name}`} : <i>{friend.email}</i></p>
+                        </div>
                     )
                 })}
             </div>

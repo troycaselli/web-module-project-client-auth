@@ -3,6 +3,9 @@
     margin-bottom: 1%;
     font-weight: 900;
 }
+#friends-list {
+    padding-bottom: 40px;
+}
 #friends-list p {
     font-size: 3rem;
     font-weight: 900;

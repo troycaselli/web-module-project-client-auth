@@ -74,7 +74,7 @@ const AddFriend = () => {
                     ></input>
                 </div>
                 <button 
-                    className={disabled ? 'disabled' : ''} 
+                    className={disabled ? 'disabled' : 'enabled'} 
                     type='submit' 
                     disabled={disabled}
                 >SUBMIT</button>
