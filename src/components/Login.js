@@ -44,6 +44,7 @@ const Login = (props) => {
                         type='text'
                         name='username'
                         value={credentials.username}
+                        placeholder='Bloom'
                         onChange={handleChange}
                     ></input>
                 </div>
@@ -53,6 +54,7 @@ const Login = (props) => {
                         type='password'
                         name='password'
                         value={credentials.password}
+                        placeholder='Tech'
                         onChange={handleChange}
                     ></input>
                 </div>

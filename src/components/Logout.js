@@ -20,7 +20,7 @@ const Logout = (props) => {
               .then(async () => {
                   localStorage.removeItem('token');
                   localStorage.removeItem('loggedInStatus');
-                  await delay(4000)
+                  await delay(2000)
                   return navigate('/login');
               })
               .catch(err => console.log(err.response.data.error));
